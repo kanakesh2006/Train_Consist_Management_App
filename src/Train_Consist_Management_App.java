@@ -17,17 +17,17 @@ public class Train_Consist_Management_App {
         }
     }
 
-    // Method to calculate total capacity (TESTABLE)
-    public static int calculateTotalCapacity(List<Bogie> bogies) {
+    // Testable method
+    public static int getTotalCapacity(List<Bogie> bogies) {
         return bogies.stream()
-                .map(b -> b.capacity)
-                .reduce(0, Integer::sum);
+                .map(b -> b.capacity)          // extract capacity
+                .reduce(0, Integer::sum);     // sum all values
     }
 
     public static void main(String[] args) {
 
         System.out.println("=================================");
-        System.out.println("  UC10: Total Train Capacity ");
+        System.out.println("  UC10: Count Total Seats ");
         System.out.println("=================================\n");
 
         // Create bogie list
@@ -45,7 +45,7 @@ public class Train_Consist_Management_App {
         }
 
         // Calculate total capacity
-        int total = calculateTotalCapacity(bogies);
+        int total = getTotalCapacity(bogies);
 
         // Display result
         System.out.println("\nTotal Seating Capacity: " + total);
