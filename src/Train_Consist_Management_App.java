@@ -1,8 +1,8 @@
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.*;
 
 /**
- * UC9: Group Bogies by Type using groupingBy
+ * UC10: Count Total Seats in Train using reduce()
  */
 public class Train_Consist_Management_App {
 
@@ -17,16 +17,17 @@ public class Train_Consist_Management_App {
         }
     }
 
-    // Method for grouping bogies (TESTABLE)
-    public static Map<String, List<Bogie>> groupBogiesByType(List<Bogie> bogies) {
+    // Method to calculate total capacity (TESTABLE)
+    public static int calculateTotalCapacity(List<Bogie> bogies) {
         return bogies.stream()
-                .collect(Collectors.groupingBy(b -> b.name));
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
     }
 
     public static void main(String[] args) {
 
         System.out.println("=================================");
-        System.out.println("  UC9: Group Bogies by Type ");
+        System.out.println("  UC10: Total Train Capacity ");
         System.out.println("=================================\n");
 
         // Create bogie list
@@ -35,30 +36,21 @@ public class Train_Consist_Management_App {
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("Sleeper", 70));
-        bogies.add(new Bogie("AC Chair", 60));
+        bogies.add(new Bogie("General", 90));
 
-        // Display all bogies
-        System.out.println("All Bogies:");
+        // Display bogies
+        System.out.println("Bogies:");
         for (Bogie b : bogies) {
             System.out.println(b.name + " -> " + b.capacity);
         }
 
-        // Group bogies
-        Map<String, List<Bogie>> grouped = groupBogiesByType(bogies);
+        // Calculate total capacity
+        int total = calculateTotalCapacity(bogies);
 
-        // Display grouped result
-        System.out.println("\nGrouped Bogies:");
+        // Display result
+        System.out.println("\nTotal Seating Capacity: " + total);
 
-        for (Map.Entry<String, List<Bogie>> entry : grouped.entrySet()) {
-            System.out.println("Bogie Type: " + entry.getKey());
-            for (Bogie b : entry.getValue()) {
-                System.out.println("Capacity -> " + b.capacity);
-            }
-        }
-
-        System.out.println("\nUC9 grouping completed...");
+        System.out.println("\nUC10 aggregation completed...");
     }
 }
-
 
