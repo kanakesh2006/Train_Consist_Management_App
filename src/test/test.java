@@ -3,53 +3,59 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class test {
 
-    // Bogie found
+    //  Found
     @Test
-    void testSearch_BogieFound() {
+    void testBinarySearch_BogieFound() {
         String[] input = {"BG101","BG205","BG309","BG412","BG550"};
 
-        boolean result = Train_Consist_Management_App.linearSearch(input, "BG309");
-
-        assertTrue(result);
+        assertTrue(Train_Consist_Management_App.binarySearch(input, "BG309"));
     }
 
-    // Bogie not found
+    //  Not found
     @Test
-    void testSearch_BogieNotFound() {
+    void testBinarySearch_BogieNotFound() {
         String[] input = {"BG101","BG205","BG309","BG412","BG550"};
 
-        boolean result = Train_Consist_Management_App.linearSearch(input, "BG999");
-
-        assertFalse(result);
+        assertFalse(Train_Consist_Management_App.binarySearch(input, "BG999"));
     }
 
-    // First element match
+    //  First element
     @Test
-    void testSearch_FirstElementMatch() {
+    void testBinarySearch_FirstElementMatch() {
         String[] input = {"BG101","BG205","BG309"};
 
-        boolean result = Train_Consist_Management_App.linearSearch(input, "BG101");
-
-        assertTrue(result);
+        assertTrue(Train_Consist_Management_App.binarySearch(input, "BG101"));
     }
 
-    // Last element match
+    //  Last element
     @Test
-    void testSearch_LastElementMatch() {
+    void testBinarySearch_LastElementMatch() {
         String[] input = {"BG101","BG205","BG309","BG412","BG550"};
 
-        boolean result = Train_Consist_Management_App.linearSearch(input, "BG550");
-
-        assertTrue(result);
+        assertTrue(Train_Consist_Management_App.binarySearch(input, "BG550"));
     }
 
-    // Single element array
+    //  Single element
     @Test
-    void testSearch_SingleElementArray() {
+    void testBinarySearch_SingleElementArray() {
         String[] input = {"BG101"};
 
-        boolean result = Train_Consist_Management_App.linearSearch(input, "BG101");
+        assertTrue(Train_Consist_Management_App.binarySearch(input, "BG101"));
+    }
 
-        assertTrue(result);
+    //  Empty array
+    @Test
+    void testBinarySearch_EmptyArray() {
+        String[] input = {};
+
+        assertFalse(Train_Consist_Management_App.binarySearch(input, "BG101"));
+    }
+
+    //  Unsorted input handled
+    @Test
+    void testBinarySearch_UnsortedInputHandled() {
+        String[] input = {"BG309","BG101","BG550","BG205","BG412"};
+
+        assertTrue(Train_Consist_Management_App.binarySearch(input, "BG205"));
     }
 }
