@@ -3,61 +3,58 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class test {
 
-    // Test 1: Safe cargo assignment
+    // Basic sorting
     @Test
-    void testCargo_SafeAssignment() {
-        Train_Consist_Management_App.GoodsBogie bogie =
-                new Train_Consist_Management_App.GoodsBogie("Cylindrical");
+    void testSort_BasicSorting() {
+        int[] input = {72, 56, 24, 70, 60};
+        int[] expected = {24, 56, 60, 70, 72};
 
-        bogie.assignCargo("Petroleum");
+        int[] result = Train_Consist_Management_App.bubbleSort(input);
 
-        assertEquals("Petroleum", bogie.cargo);
+        assertArrayEquals(expected, result);
     }
 
-    // Test 2: Unsafe cargo handled
+    // Already sorted array
     @Test
-    void testCargo_UnsafeAssignmentHandled() {
-        Train_Consist_Management_App.GoodsBogie bogie =
-                new Train_Consist_Management_App.GoodsBogie("Rectangular");
+    void testSort_AlreadySortedArray() {
+        int[] input = {24, 56, 60, 70, 72};
+        int[] expected = {24, 56, 60, 70, 72};
 
-        bogie.assignCargo("Petroleum");
+        int[] result = Train_Consist_Management_App.bubbleSort(input);
 
-        assertNull(bogie.cargo); // cargo should not be assigned
+        assertArrayEquals(expected, result);
     }
 
-    // Test 3: Cargo not assigned after failure
+    // Duplicate values
     @Test
-    void testCargo_CargoNotAssignedAfterFailure() {
-        Train_Consist_Management_App.GoodsBogie bogie =
-                new Train_Consist_Management_App.GoodsBogie("Rectangular");
+    void testSort_DuplicateValues() {
+        int[] input = {72, 56, 56, 24};
+        int[] expected = {24, 56, 56, 72};
 
-        bogie.assignCargo("Petroleum");
+        int[] result = Train_Consist_Management_App.bubbleSort(input);
 
-        assertNotEquals("Petroleum", bogie.cargo);
+        assertArrayEquals(expected, result);
     }
 
-    // Test 4: Program continues after exception
+    // Single element
     @Test
-    void testCargo_ProgramContinuesAfterException() {
-        Train_Consist_Management_App.GoodsBogie b1 =
-                new Train_Consist_Management_App.GoodsBogie("Rectangular");
+    void testSort_SingleElementArray() {
+        int[] input = {50};
+        int[] expected = {50};
 
-        Train_Consist_Management_App.GoodsBogie b2 =
-                new Train_Consist_Management_App.GoodsBogie("Cylindrical");
+        int[] result = Train_Consist_Management_App.bubbleSort(input);
 
-        b1.assignCargo("Petroleum"); // fails
-        b2.assignCargo("Coal");      // should still work
-
-        assertEquals("Coal", b2.cargo);
+        assertArrayEquals(expected, result);
     }
 
-    // Test 5: Finally block execution (indirect check)
+    // All equal values
     @Test
-    void testCargo_FinallyBlockExecution() {
-        Train_Consist_Management_App.GoodsBogie bogie =
-                new Train_Consist_Management_App.GoodsBogie("Rectangular");
+    void testSort_AllEqualValues() {
+        int[] input = {40, 40, 40};
+        int[] expected = {40, 40, 40};
 
-        // No exception should crash program
-        assertDoesNotThrow(() -> bogie.assignCargo("Petroleum"));
+        int[] result = Train_Consist_Management_App.bubbleSort(input);
+
+        assertArrayEquals(expected, result);
     }
 }

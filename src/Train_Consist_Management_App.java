@@ -1,61 +1,52 @@
 import java.util.*;
 
 /**
- * UC15: Safe Cargo Assignment using try-catch-finally
+ * UC16: Sort Passenger Bogies by Capacity (Bubble Sort)
  */
 public class Train_Consist_Management_App {
 
-    // Custom Runtime Exception
-    static class CargoSafetyException extends RuntimeException {
-        public CargoSafetyException(String message) {
-            super(message);
-        }
-    }
+    // Testable method (IMPORTANT)
+    public static int[] bubbleSort(int[] arr) {
 
-    // Goods Bogie class
-    static class GoodsBogie {
-        String shape;
-        String cargo;
+        int n = arr.length;
 
-        GoodsBogie(String shape) {
-            this.shape = shape;
-        }
+        // Bubble Sort logic
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
 
-        // Assign cargo with safety validation
-        public void assignCargo(String cargo) {
-            try {
-                // Rule: Rectangular bogie cannot carry petroleum
-                if (shape.equals("Rectangular") && cargo.equals("Petroleum")) {
-                    throw new CargoSafetyException("Unsafe cargo assignment!");
+                if (arr[j] > arr[j + 1]) {
+                    // swap
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                 }
-
-                this.cargo = cargo;
-                System.out.println("Cargo assigned successfully -> " + cargo);
-
-            } catch (CargoSafetyException e) {
-                System.out.println("Error: " + e.getMessage());
-
-            } finally {
-                System.out.println("Cargo validation completed for " + shape + " bogie");
             }
         }
+
+        return arr;
     }
 
     public static void main(String[] args) {
 
         System.out.println("=================================");
-        System.out.println("  UC15: Safe Cargo Assignment ");
+        System.out.println(" UC16: Manual Sorting using Bubble Sort ");
         System.out.println("=================================\n");
 
-        GoodsBogie b1 = new GoodsBogie("Cylindrical");
-        b1.assignCargo("Petroleum");   // valid
+        int[] capacities = {72, 56, 24, 70, 60};
 
-        System.out.println();
+        System.out.println("Original Capacities:");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
 
-        GoodsBogie b2 = new GoodsBogie("Rectangular");
-        b2.assignCargo("Petroleum");   // invalid
+        bubbleSort(capacities);
 
-        System.out.println("\nUC15 runtime handling completed...");
+        System.out.println("\n\nSorted Capacities (Ascending):");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
+
+        System.out.println("\n\nUC16 sorting completed...");
     }
 }
 
